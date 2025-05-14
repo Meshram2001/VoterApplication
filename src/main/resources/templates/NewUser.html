@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voter Information Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        input[type="file"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+<body>
+<h2>Voter Registration Form</h2>
+<form action="/submitVoterForm" method="post" enctype="multipart/form-data">
+    <!-- UniqueID will usually be auto-generated, so keep it hidden or omit in UI -->
+    <!-- <input type="hidden" name="uniqueID"> -->
+
+    <label for="name">Name:</label><br>
+    <input id="name" type="text" name="name" required><br><br>
+
+    <label for="voterNo">Voter Number:</label><br>
+    <input id="voterNo" type="text" name="voterNo" required><br><br>
+
+    <label for="gender">Gender:</label><br>
+    <input id="gender" type="text" name="gender" required><br><br>
+
+    <label for="relationship">Relationship:</label><br>
+    <input  id = "relationship" type="text" name="relationship"><br><br>
+
+    <label for="address">Address:</label><br>
+    <input id="address" type="text" name="address"><br><br>
+
+    <label for="post">Post:</label><br>
+    <input id="post" type="text" name="post"><br><br>
+
+    <label for="village">Village:</label><br>
+    <input  id="village" type="text" name="village"><br><br>
+
+    <label for="taluka">Taluka:</label><br>
+    <input id="taluka" type="text" name="taluka"><br><br>
+
+    <label for="district">District:</label><br>
+    <input id="district" type="text" name="district"><br><br>
+
+    <label for="pincode">Pincode:</label><br>
+    <input id="pincode" type="text" name="pincode"><br><br>
+
+    <label for="phoneNo">Phone Number:</label><br>
+    <input id="phoneNo" type="number" name="phoneNo"><br><br>
+
+    <label for="DOB">Date of Birth:</label><br>
+    <input id="DOB" type="date" name="DOB"><br><br>
+
+    <label for="passPhoto">Passport Photo:</label><br>
+    <input id="passPhoto" type="file" name="passPhoto"><br><br>
+
+    <label for="ID_proof">ID Proof:</label><br>
+    <input id="ID_proof" type="file" name="ID_proof"><br><br>
+
+    <label for="address_proof">Address Proof:</label><br>
+    <input id="address_proof" type="file" name="address_proof"><br><br>
+
+    <label for="other_Doc">Other Document:</label><br>
+    <input id="other_Doc" type="file" name="other_Doc"><br><br>
+
+    <label for="signature">Signature:</label><br>
+    <input id="signature" type="file" name="signature"><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
