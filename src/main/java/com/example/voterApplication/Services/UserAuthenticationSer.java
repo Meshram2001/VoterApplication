@@ -12,5 +12,6 @@ public interface UserAuthenticationSer {
 
     String UserAuth(UserAuthenticationDTO userAuthenticationDTO) throws IllegalAccessException;
 
-//    List<UserAuthenticationEntity> getAllUsers();
+    //To get the all user
+    List<UserAuthenticationEntity> getAllUsers();
 }

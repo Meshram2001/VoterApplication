@@ -39,9 +39,10 @@ public class VoterController {
 
 
 //    // New method to fetch all users
-//    @GetMapping("users")
-//    public ResponseEntity<List<UserAuthenticationEntity>> getAllUsers() {
-//        List<UserAuthenticationEntity> users = userAuthenticationSer.getAllUsers();
-//        return ResponseEntity.ok(users);
-//    }
+@GetMapping("/users")
+public ResponseEntity<List<UserAuthenticationEntity>> getAllUsers() {
+    List<UserAuthenticationEntity> users = userAuthenticationSer.getAllUsers();
+    return ResponseEntity.ok(users);
+}
+
 }

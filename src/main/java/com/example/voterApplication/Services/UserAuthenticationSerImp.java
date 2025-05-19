@@ -6,69 +6,81 @@ import com.example.voterApplication.Repository.UserAuthenticationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import java.util.List;
 
+
+//This the method for put the user in the database
 @Service
 public class UserAuthenticationSerImp implements  UserAuthenticationSer{
 
-    @Autowired
-  private  UserAuthenticationRepo userAuthenticationRepo;
+
+  private final UserAuthenticationRepo userAuthenticationRepo;
 
    public UserAuthenticationSerImp(UserAuthenticationRepo userAuthenticationRepo){
 
     this.userAuthenticationRepo=userAuthenticationRepo;
 
    }
-   @Override
-   public String UserAuth(UserAuthenticationDTO userAuthenticationDTO) throws IllegalAccessException {
+    @Override
+    public String UserAuth(UserAuthenticationDTO userAuthenticationDTO) throws IllegalAccessException {
 
-        if (userAuthenticationRepo.existsByUsername(userAuthenticationDTO.getUsername())){
-            throw new IllegalAccessException("User is already exist");
+        String username = userAuthenticationDTO.getUsername();
+        String password = userAuthenticationDTO.getPassword();
+
+        if (username == null || password == null) {
+            throw new IllegalArgumentException("Username or Password cannot be null");
         }
 
+        username = username.trim();
+        password = password.trim();
 
+        if (userAuthenticationRepo.existsByUsername(username)) {
+            throw new IllegalAccessException("User already exists");
+        }
 
-       UserAuthenticationEntity userAuthenticationEntity =new UserAuthenticationEntity();
-       userAuthenticationEntity.setUsername(userAuthenticationDTO.getUsername().trim());
-       userAuthenticationEntity.setPassword(userAuthenticationDTO.getPassword().trim());
+        UserAuthenticationEntity userAuthenticationEntity = new UserAuthenticationEntity();
+        userAuthenticationEntity.setUsername(username);
+        userAuthenticationEntity.setPassword(password);
 
+        userAuthenticationRepo.save(userAuthenticationEntity); // Don't forget to save the user!
 
+        return userAuthenticationEntity.getUsername();
+    }
 
-     return userAuthenticationEntity.getUsername();
-
-   }
 
     @Override
     public boolean Authentication(UserAuthenticationDTO dto) {
-        String username = dto.getUsername().trim();
-        String password = dto.getPassword().trim();
+        String username = dto.getUsername();
+        String password = dto.getPassword();
 
-        // Check if it's admin
+        if (username == null || password == null) {
+            return false;
+        }
+
+        username = username.trim();
+        password = password.trim();
+
         if ("admin".equals(username) && "password".equals(password)) {
             return true;
         }
 
-        // Check user in DB
         if (userAuthenticationRepo.existsByUsername(username)) {
             UserAuthenticationEntity userAuthenticationEntity = userAuthenticationRepo.findByUsername(username);
-
-            if (userAuthenticationEntity.getPassword().equals(password)) {
-                return true; // valid login
-            } else {
-                return false; // password mismatch
-            }
+            return userAuthenticationEntity.getPassword().equals(password);
         }
 
-        return false; // username not found
+        return false;
     }
 
     // Methode for fetching the all user data
+    @Override
+    public List<UserAuthenticationEntity> getAllUsers() {
 
-
-//    @Override
-//    public List<UserAuthenticationEntity> getAllUsers() {
-//        return userAuthenticationRepo.findAll();
-//    }
+        return userAuthenticationRepo.findByusername("Admin");
+    }
 
 
 }
